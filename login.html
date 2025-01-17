@@ -1,0 +1,41 @@
+<script>
+    function login() {
+        var datos = {
+            username: $('#username').val(),
+            password: $('#password').val()
+        }
+
+        $.ajax({
+            url: backend + "/auth/login",
+            type: 'post',
+            datatype: 'json',
+            data: JSON.stringify(datos),
+            contentType: 'application/json',
+            xhrFields: { withCredentials: true }, //regresa la cookie e indica que es el mismo usuario
+            success: function (respuesta) {
+                console.log(respuesta);
+              
+                $.gritter.add({
+                    title: 'Hola',
+                    sticky: false,
+                    image: '/images/correcto.png'
+                });
+            }
+        });
+    }
+
+</script>
+
+<form >
+    <fieldset>
+        <legend>Login</legend>
+        <div class="form-group">
+            <label for="username" class="form-label mt-4">Nombre de Usuario</label>
+            <input type="text" class="form-control" id="username" placeholder="Escribe tu nombre de usuario">
+        </div>
+        <div class="form-group">
+            <label for="password" class="form-label mt-4">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password" autocomplete="off">
+        </div>
+        <button type="button" class="btn btn-primary mt-4" onclick="login();">Login</button>
+    </fieldset </form>
