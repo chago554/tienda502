@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Consultorio Santiago</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+
+    <script type="text/javascript" src="js/jquery.gritter.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/jquery.gritter.css" />
+
+    <script type="text/javascript" src="js/jquery.validate.js"></script>
+    <script type="text/javascript" src="js/additional-methods.js"></script>
+    <script>
+        const backend = "http://127.0.0.1:3000";
+
+        $.extend($.gritter.options, {
+            class_name: 'gritter-bolder',
+            position: 'top-right',
+            fade_in_speed: 500,
+            fade_out_speed: 1500,
+            time: '2000'
+        });
+
+
+        $(function () {
+            $("#divLogin").load("login.html");
+        });
+
+    </script>
+</head>
+
+<body>
+    <div id="divLogin"></div>
+    <div id="divMenu"></div>
+    <div id="divPrincipal"></div>
+</body>
+
+</html>
