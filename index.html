@@ -26,7 +26,57 @@
 
       $(function () {
         $("#divLogin").load("login.html");
+        consultarEstatus();
       });
+
+      function consultarEstatus() {
+        $.ajax({
+          url: backend + "/auth/estatus",
+          type: "post",
+          datatype: "json",
+          xhrFields: { withCredentials: true },
+          success: function (respuesta) {
+            console.log(respuesta);
+            if (respuesta.accesoCorrecto) {
+              $("#divLogin").empty();
+              $("#divPrincipal").empty();
+              $("#divMenu").load("/menus/administrador.html");
+            } else {
+              $("#divLogin").load("login.html");
+              $("#divMenu").empty();
+              $("#divPrincipal").empty();
+            }
+          },
+        });
+      }
+
+      function logout() {
+        $.ajax({
+          url: backend + "/auth/logout",
+          type: "post",
+          datatype: "json",
+          xhrFields: { withCredentials: true },
+          success: function (respuesta) {
+            console.log(respuesta);
+
+            $.gritter.add({
+                title: respuesta.mensajes,
+                sticky: false,
+                image: "/images/correcto.png",
+              });
+              
+            if (respuesta.accesoCorrecto) {
+              $("#divLogin").empty();
+              $("#divPrincipal").empty();
+              $("#divMenu").load("/menus/administrador.html");
+            } else {
+              $("#divLogin").load("login.html");
+              $("#divMenu").empty();
+              $("#divPrincipal").empty();
+            }
+          },
+        });
+      }
     </script>
   </head>
 
