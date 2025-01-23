@@ -1,88 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Consultorio Santiago</title>
-    <script src="js/jquery.min.js"></script>
-    <script src="./js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="./css/bootstrap.css" />
 
-    <script type="text/javascript" src="js/jquery.gritter.js"></script>
-    <link type="text/css" rel="stylesheet" href="css/jquery.gritter.css" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Consultorio Santiago</title>
+  <script src="js/jquery.min.js"></script>
+  <script src="./js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="./css/bootstrap.css" />
 
-    <script type="text/javascript" src="js/jquery.validate.js"></script>
-    <script type="text/javascript" src="js/additional-methods.js"></script>
-    <script>
-      const backend = "http://127.0.0.1:3000";
+  <script type="text/javascript" src="js/jquery.gritter.js"></script>
+  <link type="text/css" rel="stylesheet" href="css/jquery.gritter.css" />
 
-      $.extend($.gritter.options, {
-        class_name: "gritter-bolder",
-        position: "top-right",
-        fade_in_speed: 500,
-        fade_out_speed: 1500,
-        time: "2000",
+  <script type="text/javascript" src="js/jquery.validate.js"></script>
+  <script type="text/javascript" src="js/additional-methods.js"></script>
+  <script>
+    const backend = "http://127.0.0.1:3000";
+
+    $.extend($.gritter.options, {
+      class_name: "gritter-bolder",
+      position: "top-right",
+      fade_in_speed: 500,
+      fade_out_speed: 1500,
+      time: "2000",
+    });
+
+    $(function () {
+      $("#divLogin").load("login.html");
+      consultarEstatus();
+    });
+
+    function consultarEstatus() {
+      $.ajax({
+        url: backend + "/auth/estatus",
+        type: "post",
+        datatype: "json",
+        xhrFields: { withCredentials: true },
+        success: function (respuesta) {
+          console.log(respuesta);
+          if (respuesta.accesoCorrecto) {
+            $("#divLogin").empty();
+            $("#divPrincipal").empty();
+            $('#divMenu').load('/menus/' + respuesta.menu + '.html', function () {
+              $('#datosUsuario').html('<h5 class="mb-0 text-white">' + respuesta.nombreCompleto + '</h5><h6 class="mb-0 text-white">' + respuesta.perfil + '</h6>');
+            });
+          } 
+        },
       });
+    }
 
-      $(function () {
-        $("#divLogin").load("login.html");
-        consultarEstatus();
+    function logout() {
+      $.ajax({
+        url: backend + "/auth/logout",
+        type: "post",
+        datatype: "json",
+        xhrFields: { withCredentials: true },
+        success: function (respuesta) {
+          console.log(respuesta);
+
+          $.gritter.add({
+            title: respuesta.mensajes,
+            sticky: false,
+            image: "/images/correcto.png",
+          });
+
+          if (respuesta.accesoCorrecto) {
+            $("#divLogin").empty();
+            $("#divPrincipal").empty();
+            $("#divMenu").load("/menus/administrador.html");
+          } else {
+            $("#divLogin").load("login.html");
+            $("#divMenu").empty();
+            $("#divPrincipal").empty();
+          }
+        },
       });
+    }
+  </script>
+</head>
 
-      function consultarEstatus() {
-        $.ajax({
-          url: backend + "/auth/estatus",
-          type: "post",
-          datatype: "json",
-          xhrFields: { withCredentials: true },
-          success: function (respuesta) {
-            console.log(respuesta);
-            if (respuesta.accesoCorrecto) {
-              $("#divLogin").empty();
-              $("#divPrincipal").empty();
-              $("#divMenu").load("/menus/administrador.html");
-            } else {
-              $("#divLogin").load("login.html");
-              $("#divMenu").empty();
-              $("#divPrincipal").empty();
-            }
-          },
-        });
-      }
+<body>
+  <div id="divLogin"></div>
+  <div id="divMenu"></div>
+  <div id="divPrincipal"></div>
+</body>
 
-      function logout() {
-        $.ajax({
-          url: backend + "/auth/logout",
-          type: "post",
-          datatype: "json",
-          xhrFields: { withCredentials: true },
-          success: function (respuesta) {
-            console.log(respuesta);
-
-            $.gritter.add({
-                title: respuesta.mensajes,
-                sticky: false,
-                image: "/images/correcto.png",
-              });
-              
-            if (respuesta.accesoCorrecto) {
-              $("#divLogin").empty();
-              $("#divPrincipal").empty();
-              $("#divMenu").load("/menus/administrador.html");
-            } else {
-              $("#divLogin").load("login.html");
-              $("#divMenu").empty();
-              $("#divPrincipal").empty();
-            }
-          },
-        });
-      }
-    </script>
-  </head>
-
-  <body>
-    <div id="divLogin"></div>
-    <div id="divMenu"></div>
-    <div id="divPrincipal"></div>
-  </body>
 </html>
