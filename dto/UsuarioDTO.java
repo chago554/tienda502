@@ -11,8 +11,6 @@ public class UsuarioDTO {
 	Perfiles perfil;
 	UUID uuid;
 	
-	
-	
 	// el DTO necesita los setters y getters
 	public String getNombreCompleto() {
 		return nombre + " " + paterno + " " + materno;
