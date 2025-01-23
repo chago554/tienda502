@@ -23,7 +23,9 @@
 
                 if(respuesta.accesoCorrecto){
                     $('#divLogin').empty();
-                    $('#divMenu').load('/menus/administrador.html');
+                    $('#divMenu').load('/menus/'+respuesta.menu +'.html', function(){
+                        $('#datosUsuario').html('<h5 class="mb-0 text-white">'+respuesta.nombreCompleto+'</h5><h6 class="mb-0 text-white">' + respuesta.perfil + '</h6>');
+                    });
                 }
             }
         });
