@@ -45,7 +45,9 @@ public class UsuarioService {
 		if(usuarioBD.isPresent()) {
 			respuesta.setAccesoCorrecto(true);
 			respuesta.setMensajes("¡Acceso correcto!");
-			respuesta.setMenu(usuarioBD.get().getPerfil().toString().toUpperCase());
+			respuesta.setMenu(usuarioBD.get().getPerfil().toString().toLowerCase());
+			respuesta.setNombreCompleto(usuarioBD.get().getNombrCompleto());
+			respuesta.setPerfil(usuarioBD.get().getPerfil());
 			sesion.setAttribute("estatusUsuario", respuesta);  //me va a servir para que se contenga el estatus del usuario para su sesion
 		}else {
 			respuesta.setMensajes("¡Acceso denegado!");

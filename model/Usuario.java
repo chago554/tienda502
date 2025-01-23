@@ -31,10 +31,14 @@ public class Usuario {
 	@Column
 	String password;
 	
-
-
 	@Column(unique = true)
 	UUID uuid; //id unico universal
+	
+	
+	public String getNombrCompleto() {
+		return nombre + " " + paterno + " " + materno;
+	}
+
 	public String getPassword() {
 		return password;
 	}
