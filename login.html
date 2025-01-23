@@ -16,17 +16,21 @@
                 console.log(respuesta);
               
                 $.gritter.add({
-                    title: 'Hola',
+                    title: respuesta.mensajes,
                     sticky: false,
                     image: '/images/correcto.png'
                 });
+
+                if(respuesta.accesoCorrecto){
+                    $('#divLogin').empty();
+                    $('#divMenu').load('/menus/administrador.html');
+                }
             }
         });
     }
-
 </script>
 
-<form >
+<form  class="p-5">
     <fieldset>
         <legend>Login</legend>
         <div class="form-group">
