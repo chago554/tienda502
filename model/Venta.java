@@ -24,7 +24,6 @@ public class Venta {
 	@Column(unique = true)
 	UUID uuid;
 	
-	
 	public Long getId() {
 		return id;
 	}
@@ -49,7 +48,4 @@ public class Venta {
 	public void setUuid(UUID uuid) {
 		this.uuid = uuid;
 	}
-	
-	
-	
 }
