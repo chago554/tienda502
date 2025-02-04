@@ -38,13 +38,13 @@
         xhrFields: { withCredentials: true },
         success: function (respuesta) {
           console.log(respuesta);
-          if (respuesta.accesoCorrecto) {
+          if (respuesta.accesoCorrecto == true) {
             $("#divLogin").empty();
             $("#divPrincipal").empty();
             $('#divMenu').load('/menus/' + respuesta.menu + '.html', function () {
               $('#datosUsuario').html('<h5 class="mb-0 text-white">' + respuesta.nombreCompleto + '</h5><h6 class="mb-0 text-white">' + respuesta.perfil + '</h6>');
             });
-          } 
+          }
         },
       });
     }
@@ -64,7 +64,7 @@
             image: "/images/correcto.png",
           });
 
-          if (respuesta.accesoCorrecto) {
+          if (respuesta.accesoCorrecto == true) {
             $("#divLogin").empty();
             $("#divPrincipal").empty();
             $("#divMenu").load("/menus/administrador.html");
@@ -82,7 +82,7 @@
 <body>
   <div id="divLogin"></div>
   <div id="divMenu"></div>
-  <div id="divPrincipal"></div>
+  <div id="divPrincipal" style="padding-top: 150px;" ></div>
 </body>
 
 </html>
