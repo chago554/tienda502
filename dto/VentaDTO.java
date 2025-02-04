@@ -6,13 +6,21 @@ import java.util.List;
 import java.util.UUID;
 
 public class VentaDTO {
-	Float total;
+	Float total = 0f;
 	LocalDateTime fecha;
 	UUID uuid =UUID.randomUUID();
 	List<DetalleVentaDTO> detalles =  new ArrayList<>();
 	UsuarioDTO usuario;
 	
 	
+	public VentaDTO(UsuarioDTO usuario) {
+		super();
+		this.usuario = usuario;
+	}
+	public VentaDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public Float getTotal() {
 		return total;
 	}

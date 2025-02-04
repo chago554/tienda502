@@ -40,8 +40,6 @@ public class EstatusUsuarioDTO {
 		this.mensajes = mensajes;
 	}
 
-
-
 	public Boolean getAccesoCorrecto() {
 		return accesoCorrecto;
 	}
@@ -60,5 +58,4 @@ public class EstatusUsuarioDTO {
 	public void setMenu(String menu) {
 		this.menu = menu;
 	}
-	
 }
