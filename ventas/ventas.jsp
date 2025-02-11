@@ -1,9 +1,8 @@
 <script>
-
-$(function () {
-    $("#detalleVenta").load("ventas/detalle.jsp");
+    $(function () {
+        $("#detalleVenta").load("ventas/detalle.jsp");
+        $("#cajaCodigo").focus();
     });
-
 
     function buscarProducto(codigo) {
         if (codigo.length >= 3) {
@@ -17,7 +16,7 @@ $(function () {
                 xhrFields: { withCredentials: true },
 
                 success: function (respuesta) {
-                    console.log(respuesta); 
+                    console.log(respuesta);
                     $("#cajaCodigo").val('');
                     $("#detalleVenta").load("ventas/detalle.jsp");
 
@@ -35,7 +34,6 @@ $(function () {
             <input type="text" class="form-control" id="cajaCodigo" placeholder="Captura el código del producto..."
                 onkeyup="buscarProducto(this.value);">
         </div>
-    </fieldset 
-</form>
+    </fieldset </form>
 
-<div id="detalleVenta" class="pt-5"></div>
+    <div id="detalleVenta" class="pt-5"></div>
