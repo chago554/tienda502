@@ -1,5 +1,7 @@
 package com.utsem.app.dto;
 
+import java.util.UUID;
+
 import com.utsem.app.enums.Perfiles;
 
 public class EstatusUsuarioDTO {
@@ -8,7 +10,7 @@ public class EstatusUsuarioDTO {
 	String menu = "";
 	String nombreCompleto ="";
 	Perfiles perfil;
-	
+	UUID uuid;
 	
 	////
 	
@@ -19,6 +21,14 @@ public class EstatusUsuarioDTO {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public UUID getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
+	}
+
 	public String getNombreCompleto() {
 		return nombreCompleto;
 	}

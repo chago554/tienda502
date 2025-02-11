@@ -13,6 +13,7 @@ import com.utsem.app.service.VentaService;
 
 import jakarta.servlet.http.HttpSession;
 
+
 @RestController
 @RequestMapping("ventas")
 public class VentaController {
@@ -37,4 +38,24 @@ public class VentaController {
 		}
 		return null;
 	}
+	
+	@PostMapping("limpiarVenta")
+	public String limpiarVenta(HttpSession sesion) {
+		
+		if (sesion.getAttribute("estatusUsuario") != null && (((EstatusUsuarioDTO) sesion.getAttribute("estatusUsuario")).getPerfil().equals(Perfiles.Administrador)) || ((EstatusUsuarioDTO) sesion.getAttribute("estatusUsuario")).getPerfil().equals(Perfiles.Ventas)) {
+			sesion.setAttribute("venta", new VentaDTO());
+		}
+		return "Acceso denegado";
+	}
+	
+	@PostMapping("realizarVenta")
+	public String realizarVenta(HttpSession sesion) {
+		
+		if (sesion.getAttribute("estatusUsuario") != null && (((EstatusUsuarioDTO) sesion.getAttribute("estatusUsuario")).getPerfil().equals(Perfiles.Administrador)) || ((EstatusUsuarioDTO) sesion.getAttribute("estatusUsuario")).getPerfil().equals(Perfiles.Ventas)) {
+			return ventaService.realizarVenta(sesion); 
+		}
+		return "Acceso denegado";
+	}
+	
+	
 }

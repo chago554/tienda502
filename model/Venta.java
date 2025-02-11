@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Venta {
@@ -23,7 +24,15 @@ public class Venta {
 	LocalDateTime fecha;
 	@Column(unique = true)
 	UUID uuid;
+	@ManyToOne
+	Usuario usuario;
 	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	public Long getId() {
 		return id;
 	}

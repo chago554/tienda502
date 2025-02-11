@@ -7,11 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.utsem.app.dto.DetalleVentaDTO;
+import com.utsem.app.dto.EstatusUsuarioDTO;
 import com.utsem.app.dto.ProductoDTO;
 import com.utsem.app.dto.VentaDTO;
 import com.utsem.app.model.Producto;
+import com.utsem.app.model.Usuario;
+import com.utsem.app.model.Venta;
+import com.utsem.app.repository.DetalleVentaRepository;
 import com.utsem.app.repository.ProductoRepository;
 import com.utsem.app.repository.UsuarioRepository;
+import com.utsem.app.repository.VentaRepository;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -23,6 +28,10 @@ public class VentaService {
 	ModelMapper modelMapper;
 	@Autowired
 	UsuarioRepository usuarioRepository;
+	@Autowired
+	VentaRepository ventaRepository;
+	@Autowired
+	DetalleVentaRepository detalleVentaRepository;
 
 	public String buscarProducto(HttpSession sesion, String codigo) {
 		  
@@ -112,5 +121,14 @@ public class VentaService {
 		return (VentaDTO) sesion.getAttribute("venta");
 	}
 	
+	public String realizarVenta(HttpSession sesion) {
+		VentaDTO ventaDTO = (VentaDTO) sesion.getAttribute("venta");
+		EstatusUsuarioDTO usuarioDTO = (EstatusUsuarioDTO)sesion.getAttribute("estatusUsuario");
+		Usuario usuario = usuarioRepository.findByUuid(usuarioDTO.getUuid()).get();
+		Venta venta = modelMapper.map(ventaDTO, Venta.class);
+		venta.setUsuario(usuario);
+		ventaRepository.save(venta);
+		return "¡Venta exitosa!";
+	}
 	
 }
