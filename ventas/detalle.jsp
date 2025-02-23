@@ -14,7 +14,21 @@
             success: function (respuesta) {
                 console.log(respuesta);
                 mostrarCarrito(respuesta);
+                if (!respuesta.realizada) {
+                    $("#btnImprimir").hide();
 
+                    if (respuesta.detalles.length > 0) {
+                        $("#btnVenta").show();
+                        $("#btnLimpiar").show();
+                    } else {
+                        $("#btnVenta").hide();
+                        $("#btnLimpiar").hide();
+                    }
+                } else {
+                    $("#btnImprimir").show();
+                    $("#btnVenta").hide();
+
+                }
             }
         });
     }
@@ -27,7 +41,7 @@
                 '<td scope="row">$' + detalles.producto.precio + '</td>' +
                 '<td scope="row">' + detalles.cantidad + '</td>' +
                 '<td scope="row">$' + detalles.subtotal + '</td>' +
-
+                '<td scope="row"><a class="bi bi-bag-x" href="#" onclick="eliminarDetalle(\'' + detalles.uuid + '\');"></a></td>' +
                 '</tr>';
         });
         $('#tablaCarrito > tbody').html(body);
@@ -49,6 +63,8 @@
     }
 
     function realizarVenta() {
+        $("#btnVenta").hide();
+
         $.ajax({
             url: backend + "/ventas/realizarVenta",
             type: 'post',
@@ -56,12 +72,34 @@
             xhrFields: { withCredentials: true },
             success: function (respuesta) {
                 console.log(respuesta);
+
                 $.gritter.add({
                     title: respuesta,
                     sticky: false,
                     image: '/images/correcto.png'
                 });
-                limpiarVenta();
+                $("#detalleVenta").load("ventas/detalle.jsp");
+                // limpiarVenta();
+            }
+        });
+    }
+
+    function imprimir() {
+        window.print();
+    }
+
+    function eliminarDetalle(uuid) {
+        $.ajax({
+            url: backend + "/ventas/eliminarDetalle",
+            type: 'post',
+            datatype: 'json',
+            data: JSON.stringify(uuid) ,
+            contentType: 'application/json',
+            xhrFields: { withCredentials: true },
+
+            success: function (respuesta) {
+                console.log(respuesta);
+                $("#detalleVenta").load("ventas/detalle.jsp");
             }
         });
     }
@@ -75,6 +113,7 @@
             <th scope="col">Precio</th>
             <th scope="col">Cantidad</th>
             <th scope="col">Subtotal</th>
+            <th scope="col"></th>
         </tr>
     </thead>
 
@@ -88,12 +127,16 @@
             <th scope="col"></th>
             <th scope="col">Total</th>
             <th scope="col" id="celdaTotal"></th>
+            <th scope="col"></th>
         </tr>
     </tfoot>
 </table>
 
 <center>
-    <button type="button" class="btn btn-success bi bi-cart-check-fill" onclick="realizarVenta();"> Realizar venta</button>
-    <button type="button" class="btn btn-info bi bi-printer"> Imprimir ticket</button>
-    <button type="button" class="btn btn-danger bi bi-stars" onclick="limpiarVenta();"> Limpiar venta</button>
+    <button type="button" id="btnVenta" class="btn btn-success bi bi-cart-check-fill" onclick="realizarVenta();">
+        Realizar venta</button>
+    <button type="button" id="btnImprimir" class="btn btn-info bi bi-printer" onclick="imprimir();"> Imprimir
+        ticket</button>
+    <button type="button" id="btnLimpiar" class="btn btn-danger bi bi-stars" onclick="limpiarVenta();"> Limpiar
+        venta</button>
 </center>
