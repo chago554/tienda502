@@ -6,7 +6,6 @@
 
     function buscarProducto(codigo) {
         if (codigo.length >= 3) {
-
             $.ajax({
                 url: backend + "/ventas/buscarProducto",
                 type: 'post',
@@ -16,7 +15,6 @@
                 xhrFields: { withCredentials: true },
 
                 success: function (respuesta) {
-                    console.log(respuesta);
                     $("#cajaCodigo").val('');
                     $("#detalleVenta").load("ventas/detalle.jsp");
 

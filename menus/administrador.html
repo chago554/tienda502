@@ -1,4 +1,4 @@
-<nav style="position: fixed; top: 0; width: 100%;" class="navbar navbar-expand-lg bg-primary pb-5 pt-5" data-bs-theme="dark">
+<nav style="position: fixed; top: 0; width: 100%;" class="navbar navbar-expand-lg bg-primary pb-4 pt-4" data-bs-theme="dark">
     <div class="container-fluid">
 
         <a class="navbar-brand fw-semibold text-white" href="#" id="datosUsuario">Usuario</a>
@@ -21,9 +21,8 @@
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false">Catálogo</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" onclick='$("#divPrincipal").load("");'>Productos</a>
-                        <a class="dropdown-item" onclick='$("#divPrincipal").load("")'>Usuarios</a>
-
+                        <a class="dropdown-item" onclick='$("#divPrincipal").load("productos/productos.jsp");'>Productos</a>
+                        <a class="dropdown-item" onclick='$("#divPrincipal").load("usuarios/usuarios.jsp")'>Usuarios</a>
                     </div>
                 </li>
 
