@@ -15,8 +15,22 @@
                 xhrFields: { withCredentials: true },
 
                 success: function (respuesta) {
-                    $("#cajaCodigo").val('');
-                    $("#detalleVenta").load("ventas/detalle.jsp");
+                    console.log(respuesta);
+
+
+                    if (respuesta.exito == true) {
+                        $("#cajaCodigo").val('');
+                        $("#detalleVenta").load("ventas/detalle.jsp");
+                    } else {
+                        $("#cajaCodigo").val('');
+                        $("#detalleVenta").load("ventas/detalle.jsp");
+                        $.gritter.add({
+                            title: respuesta.mensaje,
+                            sticky: false,
+                            image: "/images/cancelar.png",
+                        });
+
+                    }
 
                 }
             });

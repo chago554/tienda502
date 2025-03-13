@@ -43,7 +43,7 @@
 
                 '<td scope="row">' + detalles.producto.descripcion + '</td>' +
                 '<td scope="row">$' + detalles.producto.precio + '</td>' +
-                '<td scope="row"><input type="number" class="form-control text-center w-50" value=' + detalles.cantidad + ' min="0" onchange= "modificarDetalle(\'' + detalles.uuid + '\', this.value );" ></td>' +
+                '<td scope="row" class="d-flex"><input type="number" class="form-control text-center w-50" value=' + detalles.cantidad + ' min="0" onchange= "modificarDetalle(\'' + detalles.uuid + '\', this.value );"> <button class="btn btn-info txt-dark hover" onclick="sumar5(\'' + detalles.uuid + '\', \'' + detalles.cantidad + '\');" >+ 5</button></td>' +
                 '<td scope="row">$' + detalles.subtotal + '</td>' +
                 '<td scope="row"><a class="bi bi-trash3-fill" href="#" onclick="eliminarDetalle(\'' + detalles.uuid + '\');"></a></td>' +
                 '</tr>';
@@ -130,8 +130,17 @@
                 contentType: 'application/json',
                 xhrFields: { withCredentials: true },
                 success: function (respuesta) {
-                    console.log(respuesta);
-                    $("#detalleVenta").load("ventas/detalle.jsp");
+                    if (respuesta.exito == true) {
+                        $("#cajaCodigo").val('');
+                        $("#detalleVenta").load("ventas/detalle.jsp");
+                    } else {
+                        $("#cajaCodigo").val('');
+                        $.gritter.add({
+                            title: respuesta.mensaje,
+                            sticky: false,
+                            image: "/images/cancelar.png",
+                        });
+                    }
                 }
 
             });
@@ -146,9 +155,16 @@
 
     }
 
+    //sumar 5 productos
+    function sumar5(uuid, cantidadActual) {
+        let nuevaCantidad =  parseInt(cantidadActual) + 5;
+        modificarDetalle(uuid, nuevaCantidad);
+        $("#detalleVenta").load("ventas/detalle.jsp");
+    }
+    
 </script>
 
-<table class="table table-hover " id="tablaCarrito">
+<table class="table table-hover " id="tablaCarrito">        
     <thead>
         <tr class="table-dark">
             <th scope="col">Descripción</th>
