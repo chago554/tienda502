@@ -11,10 +11,7 @@
             xhrFields: { withCredentials: true },
             success: function (respuesta) {
                 comboPerfiles(respuesta);
-
-               
                 return respuesta;
-
             }
         });
     }
