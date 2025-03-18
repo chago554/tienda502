@@ -26,6 +26,8 @@ public class Venta {
 	UUID uuid;
 	@ManyToOne
 	Usuario usuario;
+	@Column
+	String SantiagoJesusLaureanoFlores = "";
 	
 	public Usuario getUsuario() {
 		return usuario;
@@ -57,4 +59,11 @@ public class Venta {
 	public void setUuid(UUID uuid) {
 		this.uuid = uuid;
 	}
+	public String getSantiagoJesusLaureanoFlores() {
+		return SantiagoJesusLaureanoFlores;
+	}
+	public void setSantiagoJesusLaureanoFlores(String santiagoJesusLaureanoFlores) {
+		SantiagoJesusLaureanoFlores = santiagoJesusLaureanoFlores;
+	}
+	
 }

@@ -6,13 +6,21 @@ import java.util.List;
 import java.util.UUID;
 
 public class VentaDTO {
+	
 	Float total = 0f;
 	LocalDateTime fecha;
 	UUID uuid =UUID.randomUUID();
 	List<DetalleVentaDTO> detalles =  new ArrayList<>();
 	UsuarioDTO usuario;
+	Boolean realizada = false;
+	String programador = "Santiago Jesus Laureano Flores";
 	
-	
+	public Boolean getRealizada() {
+		return realizada;
+	}
+	public void setRealizada(Boolean realizada) {
+		this.realizada = realizada;
+	}
 	public VentaDTO(UsuarioDTO usuario) {
 		super();
 		this.usuario = usuario;
@@ -51,4 +59,11 @@ public class VentaDTO {
 	public void setUsuario(UsuarioDTO usuario) {
 		this.usuario = usuario;
 	}
+	public String getProgramador() {
+		return programador;
+	}
+	public void setProgramador(String programador) {
+		this.programador = programador;
+	}
+	
 }

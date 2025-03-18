@@ -1,23 +1,20 @@
 package com.utsem.app.dto;
 
 import java.util.UUID;
+
 import com.utsem.app.enums.Perfiles;
 
-public class UsuarioDTO {
+public class UsuarioDTOPassword {
 	String username;
 	String nombre;
 	String paterno;
 	String materno;
 	Perfiles perfil;
 	UUID uuid = UUID.randomUUID();
-	String mensaje ="";;
+	String mensaje;
 	Boolean exito = false;
-	String SantiagoJesusLaureanoFlores = "";
-
-	// el DTO necesita los setters y getters
-	public String getNombreCompleto() {
-		return nombre + " " + paterno + " " + materno;
-	}
+	String programador = "Santiago Jesus Laureano Flores";
+	String password;
 
 	public String getUsername() {
 		return username;
@@ -83,13 +80,20 @@ public class UsuarioDTO {
 		this.exito = exito;
 	}
 
-	public String getSantiagoJesusLaureanoFlores() {
-		return SantiagoJesusLaureanoFlores;
+	public String getProgramador() {
+		return programador;
 	}
 
-	public void setSantiagoJesusLaureanoFlores(String santiagoJesusLaureanoFlores) {
-		SantiagoJesusLaureanoFlores = santiagoJesusLaureanoFlores;
+	public void setProgramador(String programador) {
+		this.programador = programador;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 }

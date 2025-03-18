@@ -11,7 +11,7 @@ public class EstatusUsuarioDTO {
 	String nombreCompleto ="";
 	Perfiles perfil;
 	UUID uuid;
-	
+	String programador = "Santiago Jesus Laureano Flores";
 	////
 	
 	
@@ -68,4 +68,13 @@ public class EstatusUsuarioDTO {
 	public void setMenu(String menu) {
 		this.menu = menu;
 	}
+
+	public String getProgramador() {
+		return programador;
+	}
+
+	public void setProgramador(String programador) {
+		this.programador = programador;
+	}
+	
 }

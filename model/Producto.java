@@ -21,10 +21,11 @@ public class Producto {
 	Float precio;
 	@Column
 	Float existencias;
-	
-	
 	@Column(unique = true)
-	UUID uuid;
+	UUID uuid = UUID.randomUUID(); 
+	@Column 
+	String SantiagoJesusLaureanoFlores = "";
+	
 	public Long getId() {
 		return id;
 	}
@@ -60,6 +61,12 @@ public class Producto {
 	}
 	public void setUuid(UUID uuid) {
 		this.uuid = uuid;
+	}
+	public String getSantiagoJesusLaureanoFlores() {
+		return SantiagoJesusLaureanoFlores;
+	}
+	public void setSantiagoJesusLaureanoFlores(String santiagoJesusLaureanoFlores) {
+		SantiagoJesusLaureanoFlores = santiagoJesusLaureanoFlores;
 	}
 	
 	

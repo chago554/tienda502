@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.utsem.app.dto.EstatusUsuarioDTO;
 import com.utsem.app.dto.LoginDTO;
+import com.utsem.app.enums.Perfiles;
 import com.utsem.app.service.UsuarioService;
 
 import jakarta.servlet.http.HttpSession;
@@ -37,6 +38,9 @@ public class AuthController {
 		return new EstatusUsuarioDTO("Sesion finalizada");
 	}
 	
-	
+	@PostMapping("consultarPerfiles")
+	public Perfiles[] consultarPerfiles(HttpSession sesion) {
+		return usuarioService.perfiles(sesion);
+	}
 	
 }

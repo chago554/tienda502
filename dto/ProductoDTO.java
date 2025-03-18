@@ -8,7 +8,9 @@ public class ProductoDTO {
 	Float precio;
 	Float existencias;
 	UUID uuid = UUID.randomUUID();
-	
+	String SantiagoJesusLaureanoFlores = "SantiagoJesúsLaureanoFlores";
+	Boolean exito = false;
+	String mensaje ="";
 	///
 	public String getDescripcion() {
 		return descripcion;
@@ -40,6 +42,26 @@ public class ProductoDTO {
 	public void setUuid(UUID uuid) {
 		this.uuid = uuid;
 	}
+	
+	public String getSantiagoJesusLaureanoFlores() {
+		return SantiagoJesusLaureanoFlores;
+	}
+	public void setSantiagoJesusLaureanoFlores(String santiagoJesusLaureanoFlores) {
+		SantiagoJesusLaureanoFlores = santiagoJesusLaureanoFlores;
+	}
+	public Boolean getExito() {
+		return exito;
+	}
+	public void setExito(Boolean exito) {
+		this.exito = exito;
+	}
+	public String getMensaje() {
+		return mensaje;
+	}
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
+	}
+	
 	
 	
 

@@ -32,8 +32,10 @@ public class Usuario {
 	String password;
 	
 	@Column(unique = true)
-	UUID uuid; //id unico universal
+	UUID uuid = UUID.randomUUID(); //id unico universal
 	
+	@Column
+	String SantiagoJesusLaureanoFlores = "";
 	
 	public String getNombrCompleto() {
 		return nombre + " " + paterno + " " + materno;
@@ -100,6 +102,14 @@ public class Usuario {
 
 	public void setUuid(UUID uuid) {
 		this.uuid = uuid;
+	}
+
+	public String getSantiagoJesusLaureanoFlores() {
+		return SantiagoJesusLaureanoFlores;
+	}
+
+	public void setSantiagoJesusLaureanoFlores(String santiagoJesusLaureanoFlores) {
+		SantiagoJesusLaureanoFlores = santiagoJesusLaureanoFlores;
 	}
 	
 	
