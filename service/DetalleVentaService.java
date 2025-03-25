@@ -133,12 +133,12 @@ public class DetalleVentaService {
 		}
 
 		try {
-			
+
 			DetalleVenta detalle = detalleExiste.get();
 			Producto producto = detalle.getProducto();
 
 			// Actualizar existencias del producto
-			producto.setExistencias(producto.getExistencias() + detalle.getCantidad()); 
+			producto.setExistencias(producto.getExistencias() + detalle.getCantidad());
 			productoRepository.save(producto);
 
 			// Eliminar el detalle de la venta
@@ -160,43 +160,28 @@ public class DetalleVentaService {
 
 		return respuesta;
 	}
-	
-	
-	//eliminar venta
+
+	// eliminar venta
 	public RespuestaDTO eliminarVenta(HttpSession sesio, UUID uuid) {
 		RespuestaDTO respuesta = new RespuestaDTO();
-		
+
 		Optional<Venta> existeVenta = ventaRepository.findByUuid(uuid);
-		if(existeVenta.isPresent()) {
+		if (existeVenta.isPresent()) {
 			try {
 				ventaRepository.delete(existeVenta.get());
 				respuesta.setExito(true);
 				respuesta.setMensaje("¡Venta eliminada!");
-				
+
 			} catch (Exception e) {
 				respuesta.setExito(false);
 				respuesta.setMensaje("Error al eliminar esta venta");
 			}
-		}
-		else {
+		} else {
 			respuesta.setExito(false);
 			respuesta.setMensaje("Esta venta no existe...");
 		}
-		
-		
-		
 		return respuesta;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
 }

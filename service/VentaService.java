@@ -259,6 +259,5 @@ public class VentaService {
 				.map(venta -> modelMapper.map(venta, VentaDTO.class)).collect(Collectors.toList());
 	}
 
-
-
+	
 }

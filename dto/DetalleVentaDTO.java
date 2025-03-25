@@ -10,6 +10,7 @@ public class DetalleVentaDTO {
 	String programador = "Santiago Jesus Laureano Flores";
 	Float total;
 	
+	VentaDTO ventaDTO;
 	String mensaje = "";
 	Boolean exito= false;
 	
@@ -61,6 +62,12 @@ public class DetalleVentaDTO {
 	}
 	public void setExito(Boolean exito) {
 		this.exito = exito;
+	}
+	public VentaDTO getVentaDTO() {
+		return ventaDTO;
+	}
+	public void setVentaDTO(VentaDTO ventaDTO) {
+		this.ventaDTO = ventaDTO;
 	}
 	
 	

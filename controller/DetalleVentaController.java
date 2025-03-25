@@ -35,7 +35,7 @@ public class DetalleVentaController {
 
 	@PostMapping("verDetalles")
 	public List<DetalleVentaDTO> verDetalles(HttpSession sesion, @RequestBody UUID uuid) {
-		if (sesion.getAttribute("estatusUsuario") != null && (((EstatusUsuarioDTO) sesion.getAttribute("estatusUsuario")).getPerfil().equals(Perfiles.Administrador)) || ((EstatusUsuarioDTO) sesion.getAttribute("estatusUsuario")).getPerfil().equals(Perfiles.Ventas)) {
+		if (sesion.getAttribute("estatusUsuario") != null && (((EstatusUsuarioDTO) sesion.getAttribute("estatusUsuario")).getPerfil() .equals(Perfiles.Administrador)) || ((EstatusUsuarioDTO) sesion.getAttribute("estatusUsuario")).getPerfil().equals(Perfiles.Ventas)) {
 			return detalleVentaService.verDetalles(sesion, uuid);
 		}
 		return new ArrayList<>();
@@ -45,7 +45,7 @@ public class DetalleVentaController {
 	@PostMapping("modificarDetalleVenta")
 	public DetalleVentaDTO modificarDetalleVenta(HttpSession sesion, @RequestBody VentaDetalleDTO ventaDetalleDTO) {
 		DetalleVentaDTO dto = new DetalleVentaDTO();
-		if (sesion.getAttribute("estatusUsuario") != null && (((EstatusUsuarioDTO) sesion.getAttribute("estatusUsuario")).getPerfil() .equals(Perfiles.Administrador)) || ((EstatusUsuarioDTO) sesion.getAttribute("estatusUsuario")).getPerfil().equals(Perfiles.Ventas)) {
+		if (sesion.getAttribute("estatusUsuario") != null && (((EstatusUsuarioDTO) sesion.getAttribute("estatusUsuario")).getPerfil().equals(Perfiles.Administrador)) || ((EstatusUsuarioDTO) sesion.getAttribute("estatusUsuario")).getPerfil().equals(Perfiles.Ventas)) {
 			return (DetalleVentaDTO) detalleVentaService.modificarDetalleVenta(sesion, ventaDetalleDTO);
 		}
 		dto.setExito(false);
@@ -53,28 +53,28 @@ public class DetalleVentaController {
 		return dto;
 	}
 
-	//eliminar el detalle
+	// eliminar el detalle
 	@PostMapping("eliminarDetalle")
 	public RespuestaDTO eliminarDetalle(HttpSession sesion, @RequestBody VentaDetalleDTO ventaDetalleDTO) {
 		RespuestaDTO dto = new RespuestaDTO();
-		if (sesion.getAttribute("estatusUsuario") != null && (((EstatusUsuarioDTO) sesion.getAttribute("estatusUsuario")).getPerfil() .equals(Perfiles.Administrador)) || ((EstatusUsuarioDTO) sesion.getAttribute("estatusUsuario")).getPerfil().equals(Perfiles.Ventas)) {
-			return detalleVentaService.eliminarDetalle(sesion,  ventaDetalleDTO);
+		if (sesion.getAttribute("estatusUsuario") != null && (((EstatusUsuarioDTO) sesion.getAttribute("estatusUsuario")).getPerfil().equals(Perfiles.Administrador)) || ((EstatusUsuarioDTO) sesion.getAttribute("estatusUsuario")).getPerfil().equals(Perfiles.Ventas)) {
+			return detalleVentaService.eliminarDetalle(sesion, ventaDetalleDTO);
 		}
 		dto.setExito(false);
 		dto.setMensaje("¡Acceso denegado!");
 		return dto;
 	}
-	
-	//eliminar una venta
-	
+
+	// eliminar una venta
 	@PostMapping("eliminarVenta")
 	public RespuestaDTO eliminarVenta(HttpSession sesion, @RequestBody UUID uuid) {
 		RespuestaDTO dto = new RespuestaDTO();
-		if (sesion.getAttribute("estatusUsuario") != null && (((EstatusUsuarioDTO) sesion.getAttribute("estatusUsuario")).getPerfil() .equals(Perfiles.Administrador)) || ((EstatusUsuarioDTO) sesion.getAttribute("estatusUsuario")).getPerfil().equals(Perfiles.Ventas)) {
-			return detalleVentaService.eliminarVenta(sesion,  uuid);
+		if (sesion.getAttribute("estatusUsuario") != null && (((EstatusUsuarioDTO) sesion.getAttribute("estatusUsuario")).getPerfil().equals(Perfiles.Administrador)) || ((EstatusUsuarioDTO) sesion.getAttribute("estatusUsuario")).getPerfil().equals(Perfiles.Ventas)) {
+			return detalleVentaService.eliminarVenta(sesion, uuid);
 		}
 		dto.setExito(false);
 		dto.setMensaje("¡Acceso denegado!");
 		return dto;
 	}
+
 }
